@@ -61,7 +61,6 @@ namespace CarRent.Controllers
                var Car = _Carrepository.Get(viewModel.CarId);
                 Car carEntity = new Car()
                 {
-                    //Id = Car.Id,
                     Color = Car.Color,
                     ImageUrl = Car.ImageUrl,
                     PlateNumber = Car.PlateNumber,

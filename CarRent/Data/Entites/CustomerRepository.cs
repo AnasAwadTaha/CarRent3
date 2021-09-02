@@ -60,10 +60,6 @@ namespace CarRent.Data.Entites
         {
             return _DbContext.Set<Customer>().Where(expression);
         }
-        //public Customer GetByUserName(string UserName)
-        //{
-        //    return _DbContext.Customer.FirstOrDefault(i => i.CustomerName == UserName);
-        //}
     }
 }
 

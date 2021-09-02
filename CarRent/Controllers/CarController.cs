@@ -74,10 +74,6 @@ namespace CarRent.Controllers
                 if (ModelState.IsValid)
                 {
                     string FileName = UploadFile(viewModel.File) ?? string.Empty;
-                    //string uplaods = Path.Combine(hosting.WebRootPath, "Upload");
-                    //fileName = viewModel.File.Name;
-                    //string fullpath = Path.Combine(uplaods, fileName);
-                    //viewModel.File.CopyTo(new FileStream(fullpath, FileMode.Create));
                     Car Car = new Car
                     {
                         Id = viewModel.CarId,
@@ -87,14 +83,13 @@ namespace CarRent.Controllers
                         Status = viewModel.Status,
                     };
 
-
                 _repository.Insert(Car);
                     return RedirectToAction(nameof(Index));
                 }
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Ypur Enterd Invalid Data");
+                ModelState.AddModelError("", "Your Enterd Invalid Data");
             }
 
             return View(viewModel);
@@ -133,7 +128,6 @@ namespace CarRent.Controllers
             if (ModelState.IsValid)
             {
                 string FileName = UploadFile(viewModel.File) == null ? string.Empty : UploadFile(viewModel.File);
-                //string Upload = Path.Combine(hosting.WebRootPath, "Upload");
                 var car = _repository.Get(viewModel.CarId);
                 try
                 {
@@ -141,7 +135,6 @@ namespace CarRent.Controllers
                     {
                         Id = viewModel.CarId,
                         Color = viewModel.Color,
-                        //ImageUrl = FileName,
                         PlateNumber = viewModel.PlateNumber,
                         Status = viewModel.Status,
                     };
