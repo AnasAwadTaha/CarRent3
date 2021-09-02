@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CarRent.Data.Entites.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Cars</h1>
+
+<p>
+    <a asp-action="Create">Add New Car</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlateNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlateNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @if (item.ImageUrl != null)
+                {
+                    <img src="~/uploads/@item.ImageUrl" style="width:64px;height:100px;" class="img-thumbnail" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

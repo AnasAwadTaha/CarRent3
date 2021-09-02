@@ -1,0 +1,108 @@
+﻿@model IEnumerable<CarRent.Data.Entites.Car>
+
+<h1 class="text-center">Car For Rent</h1>
+<!-- THIS IS BOOTSTRAP ALERT -->
+<div class='alert alert-success' style='display:none' id='bootstrap-alert'>
+    Lucky! (this cart is available )
+</div>
+<!-- THIS IS BOOTSTRAP ALERT -->
+<div class='alert alert-danger' style='display:none' id='bootstrap-alert-Danger'>
+    Sorry! (you are selected un available car,Please select available car...)
+</div>
+<div class="modal-content " style="background-color:rgba(255,255,255,0.40);max-height: calc(100vh - 200px);
+    overflow-y: auto;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PlateNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayName("Car Image")
+                </th>
+                <th>
+                    @Html.DisplayName("Car Availability")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlateNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @if (item.ImageUrl != null)
+                        {
+                            <img src="~/uploads/@item.ImageUrl" style="width:300px;height:200px;" class="img-thumbnail" />
+                        }
+                    </td>
+                    @if (item.Status == true)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                    }
+                    @if (item.Status == false)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                    }
+
+                    <td>
+                        @if (item.Status == true)
+                        {
+                            <a onclick="showAlertsDanger()">Rent</a>
+                        }
+                        @if (item.Status == false)
+                        {
+                            <a asp-controller="Rent" onclick="showAlertsSuccess()" asp-action="Create" asp-route-id="@item.Id">Rent</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+    <style>
+        #bootstrap-alert {
+            margin: auto;
+            padding: 10px;
+            /*width: 500px;*/
+            box-shadow: 1px 1px 3px black;
+        }
+
+        #bootstrap-alert-Danger {
+            margin: auto;
+            padding: 10px;
+            /*width: 500px;*/
+            box-shadow: 1px 1px 3px black;
+            background-color: #ff6347;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        //Alerts
+        function showAlertsSuccess() {
+            document.getElementById('bootstrap-alert').style.display = 'block';
+            setTimeout(function () { document.getElementById('bootstrap-alert').style.display = 'none' }, 3000);
+            //THIS IS JS ALERT
+            // alert('success! (JS alert)');
+        }
+        function showAlertsDanger() {
+            document.getElementById('bootstrap-alert-Danger').style.display = 'block';
+            setTimeout(function () { document.getElementById('bootstrap-alert-Danger').style.display = 'none' }, 10000);
+            //THIS IS JS ALERT
+            // alert('success! (JS alert)');
+        }
+    </script>

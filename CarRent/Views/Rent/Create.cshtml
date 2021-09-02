@@ -1,0 +1,63 @@
+﻿
+@model CarRent.ViewModels.CarRentViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center">ِRent Contract</h1>
+
+<h4>Car Detalis</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CarId" class="control-label"></label>
+                        <input readonly asp-for="CarId" class="form-control" />
+                        <span asp-validation-for="CarId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PlateNumber" class="control-label"></label>
+                        <input readonly asp-for="PlateNumber" class="form-control" />
+                        <span asp-validation-for="PlateNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerName" class="control-label"></label>
+                        <input readonly asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input type="date" asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input type="date" asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="img-thumbnail">
+                        <img src="~/uploads/@Model.ImageUrl" style="width:3000px;height:400px;" class="img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
